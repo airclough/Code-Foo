@@ -1,7 +1,7 @@
 package Pimp_my_Ride;
 import java.util.Scanner;
 
-public class License_Plate 
+public class License_Plate_Foo 
 {
 	int population;
 	int base10Digits;
@@ -19,7 +19,7 @@ public class License_Plate
 	
 	public static void main(String[] args)
 	{
-		License_Plate pimpMyRide = new License_Plate();
+		License_Plate_Foo pimpMyRide = new License_Plate_Foo();
 		pimpMyRide.getPopulation();
 		pimpMyRide.base10();
 		pimpMyRide.base26();
