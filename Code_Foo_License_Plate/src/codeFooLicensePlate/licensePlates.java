@@ -1,7 +1,9 @@
-package Pimp_my_Ride;
+package codeFooLicensePlate;
+
+import java.util.Random;
 import java.util.Scanner;
 
-public class License_Plate_Foo 
+public class licensePlates
 {
 	int population;
 	int base10Digits;
@@ -12,20 +14,23 @@ public class License_Plate_Foo
 	int numbers;
 	int combo;
 	int smallestIndex;
-	int[] plates = new int[4];
-	int[] numberPatterns = new int[4];
-	int[] letterPatterns = new int[4];
-	int[] excess = new int[4];
+	int[] plates = new int[3];
+	int[] numberPatterns = new int[3];
+	int[] letterPatterns = new int[3];
+	int[] excess = new int[3];
 	
 	public static void main(String[] args)
 	{
-		License_Plate_Foo pimpMyRide = new License_Plate_Foo();
+		licensePlates pimpMyRide = new licensePlates();
 		pimpMyRide.getPopulation();
 		pimpMyRide.base10();
 		pimpMyRide.base26();
 		pimpMyRide.combo();
 		pimpMyRide.leastExcess();
 		pimpMyRide.manufacturePlates();
+		pimpMyRide.examplePlate();
+		pimpMyRide.plateLetters();
+		pimpMyRide.plateNumbers();
 	}
 		
 		public void getPopulation()
@@ -48,7 +53,6 @@ public class License_Plate_Foo
 			numberPatterns[0] = base10Digits;
 			letterPatterns[0] = 0;
 			excess[0] = totalExcess;
-			//System.out.println("In base 10 (numbers only) there will be " + platesGenerated + " license plates generated using a pattern of " + base10Digits + " number(s) and " + totalExcess + " plates left over.");
 		}
 		
 		public void base26()
@@ -64,7 +68,6 @@ public class License_Plate_Foo
 			numberPatterns[1] = 0;
 			letterPatterns[1] = base26Digits;
 			excess[1] = totalExcess;
-			//System.out.println("In base 26 (letters only) there will be " + platesGenerated + " license plates generated using a pattern of " + base26Digits + " letters(s) and " + totalExcess + " plates left over.");
 		}
 		
 		public void combo()
@@ -87,6 +90,8 @@ public class License_Plate_Foo
 						platesGenerated = (int) ((Math.pow(26, letters)) * (Math.pow(10, numbers)));
 						if (platesGenerated < population)
 						{
+							letters++;
+							numbers--;
 							break;
 						}
 						else
@@ -111,24 +116,53 @@ public class License_Plate_Foo
 	                            smallestIndex = i;
 	                        }
 			}
+			numbers = numberPatterns[smallestIndex];
+			letters = letterPatterns[smallestIndex];
 		}
 		
 		public void manufacturePlates()
 		{
 			System.out.println();
 			System.out.println("Code Foo License Plate Manufacturing Co.");
-			System.out.println("Least excess. No code-foolery. Guaranteed.");
+			System.out.println("Least excess. No Code-Foolery. Guaranteed.");
 			System.out.println();
 			
 			System.out.println("Population: " + population);
 			if (smallestIndex == 0)
-			System.out.println("Pattern: " + numberPatterns[smallestIndex] + " number(s)");
+			System.out.println("Pattern: " + numbers + " number(s)");
 				else if (smallestIndex == 1)
-				System.out.println("Pattern: " + letterPatterns[smallestIndex] + " letter(s)");
+				System.out.println("Pattern: " + letters + " letter(s)");
 					else
-					System.out.println("Pattern: " + numberPatterns[smallestIndex] + " number(s) and " + letterPatterns[smallestIndex] + " letter(s)");
+					System.out.println("Pattern: " + numbers + " number(s) and " + letters + " letter(s)");
 			
 			System.out.println("Total Plates: " + plates[smallestIndex]);
 			System.out.println("Excess Plates: " + excess[smallestIndex]);
+		}
+		
+		public void examplePlate()
+		{
+			System.out.print("Example Plate: ");
+		}
+		
+		public void plateLetters()
+		{
+			Random l = new Random();
+			String licenseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	    
+			for (int i = 0; i < letters; i++) 
+			{
+				System.out.print(licenseLetters.charAt(l.nextInt(licenseLetters.length())));
+			}
+		}
+		
+		public void plateNumbers()
+		{
+			Random n = new Random();
+			String licenseNumbers = "0123456789";
+	    
+			for (int j = 0; j < numbers; j++) 
+			{
+				System.out.print(licenseNumbers.charAt(n.nextInt(licenseNumbers.length())));
+			}
 		}
 }
